@@ -1,0 +1,4 @@
+name: MMOCore
+version: '${project.version}'
+main: me.logan.mmocore.MMOCore
+api-version: '1.20'
