@@ -26,6 +26,7 @@ public class EntityDamage implements Listener {
 
         if(plugin.getProfiles().get(player.getUniqueId()) == null) {
             player.kickPlayer("Error loading your profile, please reconnect");
+            return;
         }
 
         event.setCancelled(true);
@@ -65,9 +66,19 @@ public class EntityDamage implements Listener {
     public void entityHealthRegen(EntityRegainHealthEvent event) {
         if(!(event.getEntity() instanceof Player)) event.setCancelled(false);
 
+        Player player = (Player) event.getEntity();
+
         //TODO create scaling health regeneration system based off skills/levels
 
-        event.setCancelled(true);
+        double health = plugin.getProfiles().get(player.getUniqueId()).getHealth();
+        double regenAmount = event.getAmount();
+        double adjRegenAmount = regenAmount*5;
+
+        if(plugin.getConfigFile().getBoolean("debug")) Bukkit.getLogger().log(Level.INFO, "Player regained health" + regenAmount + "-non adjusted " + adjRegenAmount + "-adjusted amount");
+        plugin.getProfiles().get(player.getUniqueId()).setHealth(health + adjRegenAmount);
+
+
+        event.setAmount(regenAmount);
 
     }
 
