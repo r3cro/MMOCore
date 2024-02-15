@@ -27,7 +27,7 @@ public final class MMOCore extends JavaPlugin {
 
         registerListeners();
 
-        getCommand("dev").setExecutor(new DevCommand());
+        getCommand("dev").setExecutor(new DevCommand(this));
 
         this.configFile = new DataFile(this, "config");
         getConfigFile().save();
