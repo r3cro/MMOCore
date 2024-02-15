@@ -2,6 +2,7 @@ package me.logan.mmocore;
 
 import lombok.Getter;
 import me.logan.mmocore.commands.DevCommand;
+import me.logan.mmocore.listeners.EntityDamage;
 import me.logan.mmocore.listeners.IOEvent;
 import me.logan.mmocore.profiles.Profile;
 import me.logan.mmocore.utils.DataFile;
@@ -41,6 +42,7 @@ public final class MMOCore extends JavaPlugin {
     private void registerListeners() {
         PluginManager pluginManager = Bukkit.getPluginManager();
         pluginManager.registerEvents(new IOEvent(this), this);
+        pluginManager.registerEvents(new EntityDamage(this), this);
     }
 
     public MMOCore getInstance() {
