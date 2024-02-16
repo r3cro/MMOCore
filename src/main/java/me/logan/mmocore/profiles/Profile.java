@@ -17,11 +17,11 @@ public class Profile {
     private double maxHealth;
     private double armour;
 
+    private boolean loaded;
+
     public Profile(Player player) {
         this.uuid = player.getUniqueId();
         this.name = player.getName();
     }
-
-
 
 }

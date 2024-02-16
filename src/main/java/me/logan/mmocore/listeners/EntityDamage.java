@@ -36,6 +36,7 @@ public class EntityDamage implements Listener {
         double damageAmount = event.getDamage();
         double adjDamageAmount = damageAmount*5;
 
+
         if (adjDamageAmount >= health) {
             if(plugin.getConfigFile().getBoolean("debug")) Bukkit.getLogger().log(Level.INFO, "Player should be dead - " + adjDamageAmount + " - " + damageAmount);
 
@@ -54,7 +55,6 @@ public class EntityDamage implements Listener {
 
         plugin.getProfiles().get(player.getUniqueId()).setHealth(health-adjDamageAmount);
         player.setHealth(player.getHealth()-damageAmount);
-
     }
 
     @EventHandler
