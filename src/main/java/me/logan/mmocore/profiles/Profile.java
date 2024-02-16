@@ -13,15 +13,25 @@ public class Profile {
     private UUID uuid;
     private String name;
 
-    private double health;
-    private double maxHealth;
-    private double armour;
+    private int health;
+    private int defense;
+    private int mana;
+    private int combat;
+    private int mining;
+    private int farming;
+    private int foraging;
+    private int fishing;
+    private int enchanting;
+    private int alchemy;
+    private String rank;
+
 
     private boolean loaded;
 
     public Profile(Player player) {
         this.uuid = player.getUniqueId();
         this.name = player.getName();
+        this.rank = "hatch";
     }
 
 }

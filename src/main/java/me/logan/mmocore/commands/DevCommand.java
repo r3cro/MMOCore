@@ -24,7 +24,6 @@ public class DevCommand implements CommandExecutor {
         player.sendMessage("Debug");
         player.sendActionBar("test" + " dadf");
 
-        plugin.getProfile(player).setHealth(200);
 
         return true;
     }

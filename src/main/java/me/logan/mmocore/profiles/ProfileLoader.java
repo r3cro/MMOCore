@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
+import java.util.logging.Level;
 
 @AllArgsConstructor
 public class ProfileLoader extends BukkitRunnable {
@@ -17,8 +18,8 @@ public class ProfileLoader extends BukkitRunnable {
     private Profile profile;
     private MMOCore plugin;
 
-    private static final String INSERT = "INSERT INTO mmo_players VALUES(?, ?, ?, ?) ON DUPLICATE KEY UPDATE name=?";
-    private static final String SELECT = "SELECT health,armour FROM mmo_players WHERE uuid=?";
+    private static final String INSERT = "INSERT INTO mmo_players VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE name=?";
+    private static final String SELECT = "SELECT health,defense,mana,combat,mining,farming,foraging,fishing,enchanting,alchemy,playerrank FROM mmo_players WHERE uuid=?";
 
     @Override
     public void run() {
@@ -28,24 +29,42 @@ public class ProfileLoader extends BukkitRunnable {
             connection = plugin.getHikari().getConnection();
 
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT);
-            preparedStatement.setString(1, profile.getUuid().toString());
-            preparedStatement.setString(2, profile.getName());
-            preparedStatement.setDouble(3, 100);
-            preparedStatement.setDouble(4, 10);
-            preparedStatement.setString(5, profile.getName());
+            preparedStatement.setString(1, String.valueOf(profile.getUuid())); //UUID
+            preparedStatement.setString(2, profile.getName()); //Name
+            preparedStatement.setInt(3, 100); //Health
+            preparedStatement.setInt(4, 9); //Defense
+            preparedStatement.setInt(5, 8); //Mana
+            preparedStatement.setInt(6, 7); //Combat
+            preparedStatement.setInt(7, 6); //Mining
+            preparedStatement.setInt(8, 5); //Farming
+            preparedStatement.setInt(9, 4); //Foraging
+            preparedStatement.setInt(10, 3); //Fishing
+            preparedStatement.setInt(11, 2); //Enchanting
+            preparedStatement.setInt(12, 1); //Alchemy
+            preparedStatement.setString(13, "Hatch"); //Rank
+            preparedStatement.setString(14, profile.getName());
             preparedStatement.execute();
 
 
 
 
             preparedStatement = connection.prepareStatement(SELECT);
-            preparedStatement.setString(1,profile.getName());
+            preparedStatement.setString(1, profile.getUuid().toString());
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
-                profile.setHealth(resultSet.getDouble("health"));
-                profile.setArmour(resultSet.getDouble("armour"));
+                profile.setHealth(resultSet.getInt("health"));
+                profile.setDefense(resultSet.getInt("defense"));
+                profile.setMana(resultSet.getInt("mana"));
+                profile.setCombat(resultSet.getInt("combat"));
+                profile.setMining(resultSet.getInt("mining"));
+                profile.setFarming(resultSet.getInt("farming"));
+                profile.setForaging(resultSet.getInt("foraging"));
+                profile.setFishing(resultSet.getInt("fishing"));
+                profile.setEnchanting(resultSet.getInt("enchanting"));
+                profile.setAlchemy(resultSet.getInt("alchemy"));
+                profile.setRank(resultSet.getString("playerrank"));
                 profile.setLoaded(true);
             }
             preparedStatement.close();

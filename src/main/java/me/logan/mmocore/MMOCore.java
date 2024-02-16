@@ -3,8 +3,9 @@ package me.logan.mmocore;
 import com.zaxxer.hikari.HikariDataSource;
 import lombok.Getter;
 import me.logan.mmocore.commands.DevCommand;
-import me.logan.mmocore.listeners.EntityDamage;
-import me.logan.mmocore.listeners.IOEvent;
+import me.logan.mmocore.listeners.PlayerDamage;
+import me.logan.mmocore.listeners.PlayerJoin;
+import me.logan.mmocore.listeners.PlayerQuit;
 import me.logan.mmocore.profiles.Profile;
 import me.logan.mmocore.utils.DataFile;
 import org.bukkit.Bukkit;
@@ -51,8 +52,9 @@ public final class MMOCore extends JavaPlugin {
 
     private void registerListeners() {
         PluginManager pluginManager = Bukkit.getPluginManager();
-        pluginManager.registerEvents(new IOEvent(this), this);
-        pluginManager.registerEvents(new EntityDamage(this), this);
+        pluginManager.registerEvents(new PlayerJoin(this), this);
+        pluginManager.registerEvents(new PlayerQuit(this), this);
+        pluginManager.registerEvents(new PlayerDamage(this), this);
     }
 
     public MMOCore getInstance() {
@@ -86,7 +88,7 @@ public final class MMOCore extends JavaPlugin {
         try {
             connection = hikari.getConnection();
 
-            PreparedStatement preparedStatement = connection.prepareStatement("CREATE TABLE IF NOT EXISTS `mmo_players` (`uuid` varchar(36) NOT NULL, `name` varchar(16) NOT NULL, `health` double(16,2) NOT NULL, `armour` double(16,2) NOT NULL, PRIMARY KEY (`uuid`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;");
+            PreparedStatement preparedStatement = connection.prepareStatement("CREATE TABLE IF NOT EXISTS `mmo_players` (`uuid` varchar(36) NOT NULL, `name` varchar(16) NOT NULL, `health` int(16) NOT NULL, `defense` int(16) NOT NULL, `mana` int(16) NOT NULL, `combat` int(16) NOT NULL, `mining` int(16) NOT NULL, `farming` int(16) NOT NULL, `foraging` int(16) NOT NULL, `fishing` int(16) NOT NULL, `enchanting` int(16) NOT NULL, `alchemy` int(16) NOT NULL, `playerrank` varchar(36) NOT NULL, PRIMARY KEY (`uuid`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;");
             preparedStatement.execute();
             preparedStatement.close();
         } catch (SQLException e) {
