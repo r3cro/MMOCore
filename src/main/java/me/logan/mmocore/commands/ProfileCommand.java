@@ -2,8 +2,6 @@ package me.logan.mmocore.commands;
 
 import lombok.AllArgsConstructor;
 import me.logan.mmocore.MMOCore;
-import me.logan.mmocore.party.Party;
-import me.logan.mmocore.party.PartyGUI;
 import me.logan.mmocore.profiles.ProfileGUI;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -11,8 +9,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.UUID;
 
 @AllArgsConstructor
 public class ProfileCommand implements CommandExecutor {
