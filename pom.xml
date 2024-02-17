@@ -55,8 +55,16 @@
       <url>https://repo.papermc.io/repository/maven-public/</url>
     </repository>
     <repository>
+      <id>spigot-repo</id>
+      <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+    </repository>
+    <repository>
       <id>sonatype</id>
       <url>https://oss.sonatype.org/content/groups/public/</url>
+    </repository>
+    <repository>
+      <id>minecraft-repo</id>
+      <url>https://libraries.minecraft.net/</url>
     </repository>
   </repositories>
 
@@ -72,6 +80,11 @@
       <artifactId>lombok</artifactId>
       <version>1.18.30</version>
       <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.zaxxer</groupId>
+      <artifactId>HikariCP</artifactId>
+      <version>5.1.0</version>
     </dependency>
   </dependencies>
 </project>

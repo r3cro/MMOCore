@@ -3,6 +3,7 @@ package me.logan.mmocore.commands;
 import lombok.AllArgsConstructor;
 import me.logan.mmocore.MMOCore;
 import me.logan.mmocore.profiles.Profile;
+import me.logan.mmocore.utils.Utils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -23,7 +24,6 @@ public class DevCommand implements CommandExecutor {
         player.sendMessage("Debug");
         player.sendActionBar("test" + " dadf");
 
-        plugin.getProfiles().get(player.getUniqueId()).setHealth(plugin.getProfiles().get(player.getUniqueId()).getMaxHealth());
 
         return true;
     }
