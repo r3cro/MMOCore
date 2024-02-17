@@ -33,7 +33,7 @@ public class PartyCommand implements CommandExecutor {
             if (args.length == 0) {
                 if (party != null) {
                     PartyGUI partyGUI = new PartyGUI(this.plugin, player, party);
-                    partyGUI.openPartyGUI();
+                    partyGUI.open();
                     player.sendMessage("opening party gui");
                     return true;
                 }

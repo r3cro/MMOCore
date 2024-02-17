@@ -4,6 +4,7 @@ import lombok.Getter;
 import me.logan.mmocore.MMOCore;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.SkullType;
 import org.bukkit.entity.Player;
@@ -28,7 +29,7 @@ public class PartyGUI {
         this.party = party;
     }
 
-    public void openPartyGUI() {
+    public void open() {
         inventory = Bukkit.getServer().createInventory(player, 9, party.getPartyName());
 
         for (int i = 0; i < party.getPartySize(); i++) {
@@ -40,7 +41,7 @@ public class PartyGUI {
             ArrayList<String> lore = new ArrayList<>();
 
             if (party.getPartyLeaderUUID().equals(player.getUniqueId())) {
-                meta.setDisplayName("" + NamedTextColor.WHITE + NamedTextColor.DARK_RED + player.getName());
+                meta.setDisplayName("" + ChatColor.WHITE + NamedTextColor.DARK_RED + player.getName());
             } else {
                 meta.setDisplayName("" + NamedTextColor.WHITE + player.getName());
             }

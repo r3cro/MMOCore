@@ -4,6 +4,7 @@ import com.zaxxer.hikari.HikariDataSource;
 import lombok.Getter;
 import me.logan.mmocore.commands.DevCommand;
 import me.logan.mmocore.commands.PartyCommand;
+import me.logan.mmocore.commands.ProfileCommand;
 import me.logan.mmocore.listeners.PlayerDamage;
 import me.logan.mmocore.listeners.PlayerJoin;
 import me.logan.mmocore.listeners.PlayerQuit;
@@ -44,6 +45,7 @@ public final class MMOCore extends JavaPlugin {
 
         getCommand("dev").setExecutor(new DevCommand(this));
         getCommand("party").setExecutor(new PartyCommand(this));
+        getCommand("profile").setExecutor(new ProfileCommand(this));
 
         getConfigFile().save();
 
