@@ -6,6 +6,7 @@ import me.logan.mmocore.commands.DevCommand;
 import me.logan.mmocore.listeners.PlayerDamage;
 import me.logan.mmocore.listeners.PlayerJoin;
 import me.logan.mmocore.listeners.PlayerQuit;
+import me.logan.mmocore.listeners.ProfileLoad;
 import me.logan.mmocore.profiles.Profile;
 import me.logan.mmocore.utils.DataFile;
 import org.bukkit.Bukkit;
@@ -55,6 +56,7 @@ public final class MMOCore extends JavaPlugin {
         pluginManager.registerEvents(new PlayerJoin(this), this);
         pluginManager.registerEvents(new PlayerQuit(this), this);
         pluginManager.registerEvents(new PlayerDamage(this), this);
+        pluginManager.registerEvents(new ProfileLoad(this), this);
     }
 
     public MMOCore getInstance() {

@@ -20,7 +20,6 @@ public class PlayerQuit implements Listener {
 
         Profile profile = plugin.getRemovedProfile(event.getPlayer());
         new ProfileSaver(profile, plugin).runTaskAsynchronously(plugin);
-        Bukkit.broadcastMessage("quit event save");
     }
 
 }

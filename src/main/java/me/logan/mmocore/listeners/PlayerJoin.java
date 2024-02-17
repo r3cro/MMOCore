@@ -16,18 +16,12 @@ public class PlayerJoin implements Listener {
     private MMOCore plugin;
 
     @EventHandler
-    public void onLoad(ProfileLoadedEvent event) {
-        Bukkit.broadcastMessage("profileloadevent");
-    }
-
-    @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         event.setJoinMessage(null);
 
         final Profile PROFILE = new Profile(event.getPlayer());
         plugin.getProfiles().put(event.getPlayer().getUniqueId(), PROFILE);
         new ProfileLoader(PROFILE, plugin).runTaskAsynchronously(plugin);
-        Bukkit.broadcastMessage(String.valueOf(event.getPlayer().getUniqueId().getMostSignificantBits()));
 
     }
 
