@@ -9,3 +9,6 @@ commands:
     description: Party command
     usage: /party <option>
     alias: group
+  profile:
+    description: Profile command
+    usage: /profile <option>

@@ -10,7 +10,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
-import java.util.logging.Level;
 
 @AllArgsConstructor
 public class ProfileLoader extends BukkitRunnable {
@@ -18,7 +17,7 @@ public class ProfileLoader extends BukkitRunnable {
     private Profile profile;
     private MMOCore plugin;
 
-    private static final String INSERT = "INSERT INTO mmo_players VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE name=?";
+    private static final String INSERT = "INSERT INTO mmo_players VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE name=?";
     private static final String SELECT = "SELECT health,defense,mana,combat,mining,farming,foraging,fishing,enchanting,alchemy,playerrank FROM mmo_players WHERE uuid=?";
 
     @Override
@@ -31,18 +30,19 @@ public class ProfileLoader extends BukkitRunnable {
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT);
             preparedStatement.setString(1, String.valueOf(profile.getUuid())); //UUID
             preparedStatement.setString(2, profile.getName()); //Name
-            preparedStatement.setInt(3, 100); //Health
-            preparedStatement.setInt(4, 9); //Defense
-            preparedStatement.setInt(5, 8); //Mana
-            preparedStatement.setInt(6, 7); //Combat
-            preparedStatement.setInt(7, 6); //Mining
-            preparedStatement.setInt(8, 5); //Farming
-            preparedStatement.setInt(9, 4); //Foraging
-            preparedStatement.setInt(10, 3); //Fishing
-            preparedStatement.setInt(11, 2); //Enchanting
-            preparedStatement.setInt(12, 1); //Alchemy
-            preparedStatement.setString(13, "Hatch"); //Rank
-            preparedStatement.setString(14, profile.getName());
+            preparedStatement.setInt(3, 1);
+            preparedStatement.setInt(4, 100); //Health
+            preparedStatement.setInt(5, 9); //Defense
+            preparedStatement.setInt(6, 8); //Mana
+            preparedStatement.setInt(7, 7); //Combat
+            preparedStatement.setInt(8, 6); //Mining
+            preparedStatement.setInt(9, 5); //Farming
+            preparedStatement.setInt(10, 4); //Foraging
+            preparedStatement.setInt(11, 3); //Fishing
+            preparedStatement.setInt(12, 2); //Enchanting
+            preparedStatement.setInt(13, 1); //Alchemy
+            preparedStatement.setString(14, "Hatch"); //Rank
+            preparedStatement.setString(15, profile.getName());
             preparedStatement.execute();
 
 
@@ -56,6 +56,7 @@ public class ProfileLoader extends BukkitRunnable {
             if (resultSet.next()) {
                 profile.setHealth(resultSet.getInt("health"));
                 profile.setDefense(resultSet.getInt("defense"));
+                profile.setLevel(resultSet.getInt("level"));
                 profile.setMana(resultSet.getInt("mana"));
                 profile.setCombat(resultSet.getInt("combat"));
                 profile.setMining(resultSet.getInt("mining"));

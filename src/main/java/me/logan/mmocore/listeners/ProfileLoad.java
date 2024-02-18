@@ -17,17 +17,7 @@ public class ProfileLoad implements Listener {
 
     @EventHandler
     public void onProfileLoad(ProfileLoadedEvent event) {
-        Player player = Bukkit.getPlayer(event.getProfile().getUuid());
-
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                if(!player.isOnline()) {
-                    cancel();
-                }
-                player.sendActionBar(Utils.color("&c" + plugin.getProfile(player).getHealth() + "/" + plugin.getProfile(player).getHealth() + "♥      &a" + plugin.getProfile(player).getDefense() + "⛨"));
-            }
-        }.runTaskTimer(plugin, 5L, 5L);
+        Player player = event.getPlayer();
 
     }
 
