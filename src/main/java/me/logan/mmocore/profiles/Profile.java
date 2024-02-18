@@ -24,6 +24,7 @@ public class Profile {
     private int enchanting;
     private int alchemy;
     private String rank;
+    private int level;
 
 
     private boolean loaded;
