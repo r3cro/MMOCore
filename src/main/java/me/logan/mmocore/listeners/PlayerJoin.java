@@ -1,16 +1,12 @@
 package me.logan.mmocore.listeners;
 
 import lombok.AllArgsConstructor;
-import me.logan.mmocore.Events.ProfileLoadedEvent;
 import me.logan.mmocore.MMOCore;
 import me.logan.mmocore.profiles.Profile;
 import me.logan.mmocore.profiles.ProfileLoader;
-import me.logan.mmocore.utils.Utils;
-import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.scheduler.BukkitRunnable;
 
 @AllArgsConstructor
 public class PlayerJoin implements Listener {

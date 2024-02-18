@@ -2,13 +2,8 @@ package me.logan.mmocore;
 
 import com.zaxxer.hikari.HikariDataSource;
 import lombok.Getter;
-import me.logan.mmocore.commands.DevCommand;
-import me.logan.mmocore.commands.PartyCommand;
-import me.logan.mmocore.commands.ProfileCommand;
-import me.logan.mmocore.listeners.PlayerDamage;
-import me.logan.mmocore.listeners.PlayerJoin;
-import me.logan.mmocore.listeners.PlayerQuit;
-import me.logan.mmocore.listeners.ProfileLoad;
+import me.logan.mmocore.commands.*;
+import me.logan.mmocore.listeners.*;
 import me.logan.mmocore.party.PartyManager;
 import me.logan.mmocore.profiles.Profile;
 import me.logan.mmocore.utils.DataFile;
@@ -39,7 +34,6 @@ public final class MMOCore extends JavaPlugin {
         this.configFile = new DataFile(this, "config");
         this.partyManager = new PartyManager();
         setupHikari(hikari);
-
 
         registerListeners();
 

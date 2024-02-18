@@ -1,6 +1,5 @@
 package me.logan.mmocore.Events;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import me.logan.mmocore.profiles.Profile;
 import org.bukkit.Bukkit;

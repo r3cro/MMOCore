@@ -2,7 +2,6 @@ package me.logan.mmocore.profiles;
 
 import lombok.AllArgsConstructor;
 import me.logan.mmocore.MMOCore;
-import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.sql.Connection;
