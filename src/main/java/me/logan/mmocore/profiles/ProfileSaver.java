@@ -2,6 +2,7 @@ package me.logan.mmocore.profiles;
 
 import lombok.AllArgsConstructor;
 import me.logan.mmocore.MMOCore;
+import me.logan.mmocore.utils.Utils;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.sql.Connection;
@@ -15,7 +16,7 @@ public class ProfileSaver extends BukkitRunnable{
     private Profile profile;
     private MMOCore plugin;
 
-    private static final String save = "UPDATE mmo_players SET health=?, defense=?, level=?, mana=?, combat=?, mining=?, farming=?, foraging=?, fishing=?, enchanting=?, alchemy=?, playerrank=? WHERE uuid=?";
+    private static final String save = "UPDATE mmo_players SET health=?, defense=?, level=?, mana=?, combat=?, mining=?, farming=?, foraging=?, fishing=?, enchanting=?, alchemy=?, playerrank=?, lastjoin=? WHERE uuid=?";
 
     @Override
     public void run() {
@@ -37,7 +38,8 @@ public class ProfileSaver extends BukkitRunnable{
             preparedStatement.setInt(10, profile.getEnchanting());
             preparedStatement.setInt(11, profile.getAlchemy());
             preparedStatement.setString(12, profile.getRank());
-            preparedStatement.setString(13, profile.getUuid().toString());
+            preparedStatement.setTimestamp(13, Utils.getCurrentTimeStamp());
+            preparedStatement.setString(14, profile.getUuid().toString());
             preparedStatement.execute();
             preparedStatement.close();
         } catch (SQLException e) {

@@ -92,7 +92,7 @@ public final class MMOCore extends JavaPlugin {
         try {
             connection = hikari.getConnection();
 
-            PreparedStatement preparedStatement = connection.prepareStatement("CREATE TABLE IF NOT EXISTS `mmo_players` (`uuid` varchar(36) NOT NULL, `name` varchar(16) NOT NULL, `health` int(16) NOT NULL, `defense` int(16) NOT NULL, `level` int(16), `mana` int(16) NOT NULL, `combat` int(16) NOT NULL, `mining` int(16) NOT NULL, `farming` int(16) NOT NULL, `foraging` int(16) NOT NULL, `fishing` int(16) NOT NULL, `enchanting` int(16) NOT NULL, `alchemy` int(16) NOT NULL, `playerrank` varchar(36) NOT NULL, PRIMARY KEY (`uuid`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;");
+            PreparedStatement preparedStatement = connection.prepareStatement("CREATE TABLE IF NOT EXISTS `mmo_players` (`uuid` varchar(36) NOT NULL, `name` varchar(16) NOT NULL, `health` int(16) NOT NULL, `defense` int(16) NOT NULL, `level` int(16) NOT NULL, `mana` int(16) NOT NULL, `combat` int(16) NOT NULL, `mining` int(16) NOT NULL, `farming` int(16) NOT NULL, `foraging` int(16) NOT NULL, `fishing` int(16) NOT NULL, `enchanting` int(16) NOT NULL, `alchemy` int(16) NOT NULL, `playerrank` varchar(36) NOT NULL, `firstjoin` datetime NOT NULL, `lastjoin` datetime NOT NULL, PRIMARY KEY (`uuid`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;");
             preparedStatement.execute();
             preparedStatement.close();
         } catch (SQLException e) {

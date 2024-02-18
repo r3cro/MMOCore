@@ -3,13 +3,11 @@ package me.logan.mmocore.profiles;
 import lombok.AllArgsConstructor;
 import me.logan.mmocore.Events.ProfileLoadedEvent;
 import me.logan.mmocore.MMOCore;
+import me.logan.mmocore.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.ResultSet;
+import java.sql.*;
 
 @AllArgsConstructor
 public class ProfileLoader extends BukkitRunnable {
@@ -17,8 +15,8 @@ public class ProfileLoader extends BukkitRunnable {
     private Profile profile;
     private MMOCore plugin;
 
-    private static final String INSERT = "INSERT INTO mmo_players VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE name=?";
-    private static final String SELECT = "SELECT health,defense,mana,combat,mining,farming,foraging,fishing,enchanting,alchemy,playerrank FROM mmo_players WHERE uuid=?";
+    private static final String INSERT = "INSERT INTO mmo_players VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE name=?";
+    private static final String SELECT = "SELECT health,defense,level,mana,combat,mining,farming,foraging,fishing,enchanting,alchemy,playerrank,firstjoin,lastjoin FROM mmo_players WHERE uuid=?";
 
     @Override
     public void run() {
@@ -30,7 +28,7 @@ public class ProfileLoader extends BukkitRunnable {
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT);
             preparedStatement.setString(1, String.valueOf(profile.getUuid())); //UUID
             preparedStatement.setString(2, profile.getName()); //Name
-            preparedStatement.setInt(3, 1);
+            preparedStatement.setInt(3, 1); // level
             preparedStatement.setInt(4, 100); //Health
             preparedStatement.setInt(5, 9); //Defense
             preparedStatement.setInt(6, 8); //Mana
@@ -42,7 +40,9 @@ public class ProfileLoader extends BukkitRunnable {
             preparedStatement.setInt(12, 2); //Enchanting
             preparedStatement.setInt(13, 1); //Alchemy
             preparedStatement.setString(14, "Hatch"); //Rank
-            preparedStatement.setString(15, profile.getName());
+            preparedStatement.setTimestamp(15, Utils.getCurrentTimeStamp());
+            preparedStatement.setTimestamp(16, Utils.getCurrentTimeStamp());
+            preparedStatement.setString(17, profile.getName());
             preparedStatement.execute();
 
 
@@ -66,6 +66,8 @@ public class ProfileLoader extends BukkitRunnable {
                 profile.setEnchanting(resultSet.getInt("enchanting"));
                 profile.setAlchemy(resultSet.getInt("alchemy"));
                 profile.setRank(resultSet.getString("playerrank"));
+                profile.setFirstJoin(resultSet.getDate("firstjoin"));
+                profile.setLastJoin(resultSet.getDate("lastjoin"));
                 profile.setLoaded(true);
             }
             preparedStatement.close();

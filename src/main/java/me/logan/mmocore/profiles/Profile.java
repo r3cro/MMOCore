@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.entity.Player;
 
+import java.util.Date;
 import java.util.UUID;
 
 @Getter
@@ -25,7 +26,8 @@ public class Profile {
     private int alchemy;
     private String rank;
     private int level;
-
+    private Date firstJoin;
+    private Date lastJoin;
 
     private boolean loaded;
 
